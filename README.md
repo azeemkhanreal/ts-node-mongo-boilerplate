@@ -1,10 +1,10 @@
-# RESTful API Node Server Boilerplate
+# RESTful API Node-TypeScript Server Boilerplate
 
 [![Build Status](https://travis-ci.org/hagopj13/node-express-boilerplate.svg?branch=master)](https://travis-ci.org/hagopj13/node-express-boilerplate)
 [![Coverage Status](https://coveralls.io/repos/github/hagopj13/node-express-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/hagopj13/node-express-boilerplate?branch=master)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-A boilerplate/starter project for quickly building RESTful APIs using Node.js, Express, and Mongoose.
+A boilerplate/starter project for quickly building RESTful APIs using Node.js, Typescript, Express, and Mongoose.
 
 By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc. For more details, check the features list below.
 
@@ -29,8 +29,8 @@ If you would still prefer to do the installation manually, follow these steps:
 Clone the repo:
 
 ```bash
-git clone --depth 1 https://github.com/hagopj13/node-express-boilerplate.git
-cd node-express-boilerplate
+git clone --depth 1 https://github.com/azeemkhanreal/ts-node-mongo-boilerplate
+cd ts-node-mongo-boilerplate
 npx rimraf ./.git
 ```
 
@@ -68,14 +68,14 @@ cp .env.example .env
 
 - **NoSQL database**: [MongoDB](https://www.mongodb.com) object data modeling using [Mongoose](https://mongoosejs.com)
 - **Authentication and authorization**: using [passport](http://www.passportjs.org)
-- **Validation**: request data validation using [Joi](https://github.com/hapijs/joi)
+- **Validation**: request data validation using [Zod](https://zod.dev)
 - **Logging**: using [winston](https://github.com/winstonjs/winston) and [morgan](https://github.com/expressjs/morgan)
 - **Testing**: unit and integration tests using [Jest](https://jestjs.io)
 - **Error handling**: centralized error handling mechanism
 - **API documentation**: with [swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc) and [swagger-ui-express](https://github.com/scottie1984/swagger-ui-express)
 - **Process management**: advanced production process management using [PM2](https://pm2.keymetrics.io)
-- **Dependency management**: with [Yarn](https://yarnpkg.com)
-- **Environment variables**: using [dotenv](https://github.com/motdotla/dotenv) and [cross-env](https://github.com/kentcdodds/cross-env#readme)
+- **Dependency management**: with [pnpm](https://pnpm.io/)
+- **Environment variables**: using [dotenv](https://github.com/motdotla/dotenv) and [config](https://github.com/node-config/node-config#readme)
 - **Security**: set security HTTP headers using [helmet](https://helmetjs.github.io)
 - **Santizing**: sanitize request data against xss and query injection
 - **CORS**: Cross-Origin Resource-Sharing enabled using [cors](https://github.com/expressjs/cors)
@@ -93,13 +93,13 @@ cp .env.example .env
 Running locally:
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 Running in production:
 
 ```bash
-yarn start
+pnpm start
 ```
 
 Testing:
@@ -109,39 +109,39 @@ Testing:
 yarn test
 
 # run all tests in watch mode
-yarn test:watch
+pnpm test:watch
 
 # run test coverage
-yarn coverage
+pnpm coverage
 ```
 
 Docker:
 
 ```bash
 # run docker container in development mode
-yarn docker:dev
+pnpm docker:dev
 
 # run docker container in production mode
-yarn docker:prod
+pnpm docker:prod
 
 # run all tests in a docker container
-yarn docker:test
+pnpm docker:test
 ```
 
 Linting:
 
 ```bash
 # run ESLint
-yarn lint
+pnpm lint
 
 # fix ESLint errors
-yarn lint:fix
+pnpm lint:fix
 
 # run prettier
-yarn prettier
+pnpm prettier
 
 # fix prettier errors
-yarn prettier:fix
+pnpm prettier:fix
 ```
 
 ## Environment Variables
@@ -150,7 +150,7 @@ The environment variables can be found and modified in the `.env` file. They com
 
 ```bash
 # Port number
-PORT=3000
+PORT=4000
 
 # URL of the Mongo DB
 MONGODB_URL=mongodb://127.0.0.1:27017/node-boilerplate
@@ -175,23 +175,24 @@ EMAIL_FROM=support@yourapp.com
 ## Project Structure
 
 ```
-src\
- |--config\         # Environment variables and configuration related things
- |--controllers\    # Route controllers (controller layer)
- |--docs\           # Swagger files
- |--middlewares\    # Custom express middlewares
- |--models\         # Mongoose models (data layer)
- |--routes\         # Routes
- |--services\       # Business logic (service layer)
- |--utils\          # Utility classes and functions
- |--validations\    # Request data validation schemas
- |--app.js          # Express app
- |--index.js        # App entry point
+|--config\         # Environment variables and configuration related things
+  src\
+  |--api
+    |--middlewares\    # Custom express middlewares
+    |--plugins
+    |--resourses
+      |--component         # component such as user, auth etc..
+        |--controller\    # Route controller (controller layer)
+        |--model\         # Mongoose model (data layer)
+        |--route\         # Routes
+        |--service\       # Business logic (service layer)
+        |--schema\        # Request data validation schemas
+  |--loader\           # loades files such as express app, logger, passport
+  |--public\           # public files such as images, docs etc..
+  |--types\           # Global Types declaration
+  |--utils\          # Utility classes and functions
+  |--app.ts        # App entry point
 ```
-
-## API Documentation
-
-To view the list of available APIs and their specifications, run the server and go to `http://localhost:3000/v1/docs` in your browser. This documentation page is automatically generated using the [swagger](https://swagger.io/) definitions written as comments in the route files.
 
 ### API Endpoints
 
@@ -258,9 +259,9 @@ const getUser = async (userId) => {
 
 ## Validation
 
-Request data is validated using [Joi](https://joi.dev/). Check the [documentation](https://joi.dev/api/) for more details on how to write Joi validation schemas.
+Request data is validated using [Zod](https://zod.dev/). Check the [documentation](https://zod.dev/api/) for more details on how to write zod validation schemas.
 
-The validation schemas are defined in the `src/validations` directory and are used in the routes by providing them as parameters to the `validate` middleware.
+The validation schemas are defined in the associated component of `resources` directory and are used in the routes by providing them as parameters to the `validate` middleware.
 
 ```javascript
 const express = require('express');
@@ -280,7 +281,7 @@ To require authentication for certain routes, you can use the `auth` middleware.
 ```javascript
 const express = require('express');
 const auth = require('../../middlewares/auth');
-const userController = require('../../controllers/user.controller');
+const userController = require('./user.controller');
 
 const router = express.Router();
 
@@ -291,13 +292,13 @@ These routes require a valid JWT access token in the Authorization request heade
 
 **Generating Access Tokens**:
 
-An access token can be generated by making a successful call to the register (`POST /v1/auth/register`) or login (`POST /v1/auth/login`) endpoints. The response of these endpoints also contains refresh tokens (explained below).
+An access token can be generated by making a successful call to the register (`POST /v1/auth/register`) or login (`POST /api/auth/login`) endpoints. The response of these endpoints also contains refresh tokens (explained below).
 
 An access token is valid for 30 minutes. You can modify this expiration time by changing the `JWT_ACCESS_EXPIRATION_MINUTES` environment variable in the .env file.
 
 **Refreshing Access Tokens**:
 
-After the access token expires, a new access token can be generated, by making a call to the refresh token endpoint (`POST /v1/auth/refresh-tokens`) and sending along a valid refresh token in the request body. This call returns a new access token and a new refresh token.
+After the access token expires, a new access token can be generated, by making a call to the refresh token endpoint (`POST /api/auth/refresh-tokens`) and sending along a valid refresh token in the request body. This call returns a new access token and a new refresh token.
 
 A refresh token is valid for 30 days. You can modify this expiration time by changing the `JWT_REFRESH_EXPIRATION_DAYS` environment variable in the .env file.
 
@@ -308,7 +309,7 @@ The `auth` middleware can also be used to require certain rights/permissions to 
 ```javascript
 const express = require('express');
 const auth = require('../../middlewares/auth');
-const userController = require('../../controllers/user.controller');
+const userController = require('./user.controller');
 
 const router = express.Router();
 
@@ -317,18 +318,18 @@ router.post('/users', auth('manageUsers'), userController.createUser);
 
 In the example above, an authenticated user can access this route only if that user has the `manageUsers` permission.
 
-The permissions are role-based. You can view the permissions/rights of each role in the `src/config/roles.js` file.
+The permissions are role-based. You can view the permissions/rights of each role in the `utils/constants` file.
 
 If the user making the request does not have the required permissions to access this route, a Forbidden (403) error is thrown.
 
 ## Logging
 
-Import the logger from `src/config/logger.js`. It is using the [Winston](https://github.com/winstonjs/winston) logging library.
+Import the logger from `src/loader/logger.js`. It is using the [Winston](https://github.com/winstonjs/winston) logging library.
 
 Logging should be done according to the following severity levels (ascending order from most important to least important):
 
 ```javascript
-const logger = require('<path to src>/config/logger');
+const logger = require('<path to src>/loader/logger');
 
 logger.error('message'); // level 0
 logger.warn('message'); // level 1
@@ -434,6 +435,7 @@ Contributions are more than welcome! Please check out the [contributing guide](C
 - [danielfsousa/express-rest-es2017-boilerplate](https://github.com/danielfsousa/express-rest-es2017-boilerplate)
 - [madhums/node-express-mongoose](https://github.com/madhums/node-express-mongoose)
 - [kunalkapadia/express-mongoose-es6-rest-api](https://github.com/kunalkapadia/express-mongoose-es6-rest-api)
+- [hagopj13/node-express-boilerplate](https://github.com/hagopj13/node-express-boilerplate)
 
 ## License
 

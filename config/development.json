@@ -1,7 +1,7 @@
 {
     "env": "development",
     "port": 4000,
-    "databaseURL": "mongodb://localhost:27017/test",
+    "databaseURL": "mongodb://localhost:27017/tsnode-boilerplate",
     "jwt": {
       "secret": "thisisasamplesecret",
       "accessExpirationMinutes": 30,
