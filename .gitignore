@@ -1,0 +1,21 @@
+    ```
+config/production.json
+# Dependencies
+node_modules
+
+# yarn error logs
+pnpm-error.log
+
+# Environment varibales
+.env*
+!.env*.example
+
+# Code coverage
+coverage
+
+# logs
+logs
+
+pnpm-lock.yaml
+```
+build

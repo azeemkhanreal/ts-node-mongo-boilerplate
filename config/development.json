@@ -1,0 +1,12 @@
+{
+    "env": "development",
+    "port": 4000,
+    "databaseURL": "mongodb://localhost:27017/test",
+    "jwt": {
+      "secret": "thisisasamplesecret",
+      "accessExpirationMinutes": 30,
+      "refreshExpirationDays": 30,
+      "resetExpirationMinutes": 10,
+      "verifyEmailExpirationMinutes": 10
+    }
+  }

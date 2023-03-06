@@ -1,0 +1,8 @@
+{
+    "api": {
+        "prefix": "/api"
+    },
+    "jwt": {
+        "secret": "cnskjdnk"
+    }
+  }

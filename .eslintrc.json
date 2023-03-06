@@ -1,0 +1,32 @@
+{
+  "parser": "@typescript-eslint/parser",
+    "extends": [
+      "airbnb-base",
+      "airbnb-typescript",
+      "plugin:security/recommended",
+      "plugin:prettier/recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "plugins": ["security", "prettier","@typescript-eslint"],
+    "parserOptions": {
+        "ecmaVersion": 2018,
+      "project": "./tsconfig.json"
+      },
+      "rules": {
+        "no-console": "error",
+        "func-names": "off",
+        "no-underscore-dangle": "off",
+        "consistent-return": "off",
+        "jest/expect-expect": "off",
+        "security/detect-object-injection": "off",
+        "react/jsx-filename-extension": [0]
+      },
+      "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+        }
+      }
+}
