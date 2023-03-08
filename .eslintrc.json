@@ -20,7 +20,8 @@
         "consistent-return": "off",
         "jest/expect-expect": "off",
         "security/detect-object-injection": "off",
-        "react/jsx-filename-extension": [0]
+        "react/jsx-filename-extension": [0],
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
       },
       "settings": {
         "import/resolver": {

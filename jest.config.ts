@@ -1,9 +1,12 @@
-module.exports = {
-  testEnvironment: 'node',
-  testEnvironmentOptions: {
-    NODE_ENV: 'development',
+export default {
+  "roots": [
+    "<rootDir>/src"
+  ],
+  "testMatch": [
+    "**/__tests__/**/*.+(ts|tsx|js)",
+    "**/?(*.)+(spec|test).+(ts|tsx|js)"
+  ],
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
   },
-  restoreMocks: true,
-  coveragePathIgnorePatterns: ['node_modules', 'src/config', 'src/app.ts', 'tests'],
-  coverageReporters: ['text', 'lcov', 'clover', 'html'],
-};
+}

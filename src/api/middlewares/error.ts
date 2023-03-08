@@ -20,7 +20,7 @@ const errorConverter = (err: any, req: Request, res: Response, next: NextFunctio
 const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
   let { statusCode, message } = err;
 
-  if (config.get('env') === 'production' && !err.isOperational) {
+  if (config.util.getEnv('NODE_ENV') === 'production' && !err.isOperational) {
     statusCode = httpStatus.INTERNAL_SERVER_ERROR;
     message = httpStatus[httpStatus.INTERNAL_SERVER_ERROR];
   }
@@ -30,10 +30,10 @@ const errorHandler = (err: any, req: Request, res: Response, next: NextFunction)
   const response = {
     code: statusCode,
     message,
-    ...(config.get('env') === 'development' && { stack: err.stack }),
+    ...(config.util.getEnv('NODE_ENV') === 'development' && { stack: err.stack }),
   };
 
-  if (config.get('env') === 'development') {
+  if (config.util.getEnv('NODE_ENV') === 'development') {
     logger.error(err);
   }
 

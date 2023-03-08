@@ -7,7 +7,7 @@ import auth from "../../middlewares/auth";
 const router = Router();
 
 router.route("/")
-  .get(auth(), userController.getUsers)
+  .get(userController.getUsers)
   .post(validate(userValidation.createUser), userController.createUser)
 
 router.route("/:userId")

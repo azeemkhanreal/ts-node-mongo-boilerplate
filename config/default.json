@@ -4,5 +4,6 @@
     },
     "jwt": {
         "secret": "cnskjdnk"
-    }
+    },
+    "databaseURL": "mongodb://localhost:27017/tsnode-boilerplate"
   }

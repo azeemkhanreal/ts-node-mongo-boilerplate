@@ -10,10 +10,10 @@ const enumerateErrorFormat = winston.format(info => {
 });
 
 const logger = winston.createLogger({
-  level: config.get('env') === 'development' ? 'debug' : 'info',
+  level: config.util.getEnv('NODE_ENV') === 'development' ? 'debug' : 'info',
   format: winston.format.combine(
     enumerateErrorFormat(),
-    config.get('env') === 'development' ? winston.format.colorize() : winston.format.uncolorize(),
+    config.util.getEnv('NODE_ENV') === 'development' ? winston.format.colorize() : winston.format.uncolorize(),
     winston.format.splat(),
     winston.format.printf(({ level, message }) => `${level} ${message}`)
   ),
