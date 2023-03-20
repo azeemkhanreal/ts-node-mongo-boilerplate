@@ -8,4 +8,4 @@ const pick = (object: any, keys: string[]) => {
   }, {});
 };
 
-export { pick }
+export { pick };

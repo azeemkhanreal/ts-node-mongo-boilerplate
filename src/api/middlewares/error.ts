@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from "express";
-import mongoose from "mongoose";
-import httpStatus from "http-status";
-import ApiError from "../../utils/ApiError";
+import { NextFunction, Request, Response } from 'express';
+import mongoose from 'mongoose';
+import httpStatus from 'http-status';
 import config from 'config';
+import ApiError from '../../utils/ApiError';
 import logger from '../../loader/logger';
 
 const errorConverter = (err: any, req: Request, res: Response, next: NextFunction) => {
@@ -40,7 +40,4 @@ const errorHandler = (err: any, req: Request, res: Response, next: NextFunction)
   res.status(statusCode).send(response);
 };
 
-export {
-  errorConverter,
-  errorHandler,
-};
+export { errorConverter, errorHandler };

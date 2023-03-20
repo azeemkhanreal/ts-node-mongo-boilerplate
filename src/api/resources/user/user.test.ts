@@ -1,7 +1,7 @@
-import App from "../../../../src/app";
 import supertest from 'supertest';
-import {MongoMemoryServer} from 'mongodb-memory-server';
-import mongoose from "mongoose";
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
+import App from '../../../app';
 
 const app = App();
 
@@ -16,13 +16,12 @@ afterAll(async () => {
 });
 
 describe('Get /api/users', () => {
-  it('should return list of users',async () => {
+  it('should return list of users', async () => {
     await supertest(app)
       .get('/api/users')
       .expect(200)
       .then((response) => {
         expect(response.body).toEqual([]);
-      }
-    );
+      });
   });
 });
